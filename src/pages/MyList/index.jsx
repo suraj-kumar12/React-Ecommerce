@@ -16,7 +16,9 @@ const MyList = () => {
               <div className="py-2 px-3 border-b border-[rgba(0,0,0,0.1)]">
                 <h2>My List</h2>
                 <p className="mt-0">
-                  There are <span>2</span> products in your My List
+                  There are{" "}
+                  <span className="text-primary-500 font-bold">2</span> products
+                  in your My List
                 </p>
               </div>
 

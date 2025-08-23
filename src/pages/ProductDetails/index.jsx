@@ -129,89 +129,99 @@ const ProductDetails = () => {
 
           {activeTab === 1 && (
             <div className="shadow-md w-full py-5 px-8 rounded-md">
-              <div class="relative overflow-x-auto">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <div className="relative overflow-x-auto">
+                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                      <th scope="col" class="px-6 py-3">
+                      <th scope="col" className="px-6 py-3">
                         STAND UP
                       </th>
-                      <th scope="col" class="px-6 py-3">
+                      <th scope="col" className="px-6 py-3">
                         FOLDED(W/O wHEELS)
                       </th>
-                      <th scope="col" class="px-6 py-3">
+                      <th scope="col" className="px-6 py-3">
                         FOLDED(W/ WHEELS)
                       </th>
-                      <th scope="col" class="px-6 py-3">
+                      <th scope="col" className="px-6 py-3">
                         DOOR PASS THROUGH
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                      <td class="px-6 py-4">
+                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                      <td className="px-6 py-4">
                         35”L x 24”W x 37–45”H{" "}
-                        <span class="text-gray-500">(front to back wheel)</span>
+                        <span className="text-gray-500">
+                          (front to back wheel)
+                        </span>
                       </td>
-                      <td class="px-6 py-4">32.5”L x 18.5”W x 16.5”H</td>
-                      <td class="px-6 py-4">32.5”L x 24”W x 18.5”H</td>
-                      <td class="px-6 py-4">24</td>
+                      <td className="px-6 py-4">32.5”L x 18.5”W x 16.5”H</td>
+                      <td className="px-6 py-4">32.5”L x 24”W x 18.5”H</td>
+                      <td className="px-6 py-4">24</td>
                     </tr>
 
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                      <td class="px-6 py-4 font-[500]">
+                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                      <td className="px-6 py-4 font-[500]">
                         35”L x 24”W x 37–45”H
-                        <span class="text-gray-500">(front to back wheel)</span>
+                        <span className="text-gray-500">
+                          (front to back wheel)
+                        </span>
                       </td>
-                      <td class="px-6 py-4 font-[500]">
+                      <td className="px-6 py-4 font-[500]">
                         32.5”L x 18.5”W x 16.5”H
                       </td>
-                      <td class="px-6 py-4 font-[500]">
+                      <td className="px-6 py-4 font-[500]">
                         32.5”L x 24”W x 18.5”H
                       </td>
-                      <td class="px-6 py-4 font-[500]">24</td>
+                      <td className="px-6 py-4 font-[500]">24</td>
                     </tr>
 
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                      <td class="px-6 py-4 font-[500]">
+                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                      <td className="px-6 py-4 font-[500]">
                         35”L x 24”W x 37–45”H
-                        <span class="text-gray-500">(front to back wheel)</span>
+                        <span className="text-gray-500">
+                          (front to back wheel)
+                        </span>
                       </td>
-                      <td class="px-6 py-4 font-[500]">
+                      <td className="px-6 py-4 font-[500]">
                         32.5”L x 18.5”W x 16.5”H
                       </td>
-                      <td class="px-6 py-4 font-[500]">
+                      <td className="px-6 py-4 font-[500]">
                         32.5”L x 24”W x 18.5”H
                       </td>
-                      <td class="px-6 py-4 font-[500]">24</td>
+                      <td className="px-6 py-4 font-[500]">24</td>
                     </tr>
 
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                      <td class="px-6 py-4 font-[500]">
+                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                      <td className="px-6 py-4 font-[500]">
                         35”L x 24”W x 37–45”H
-                        <span class="text-gray-500">(front to back wheel)</span>
+                        <span className="text-gray-500">
+                          (front to back wheel)
+                        </span>
                       </td>
-                      <td class="px-6 py-4 font-[500]">
+                      <td className="px-6 py-4 font-[500]">
                         32.5”L x 18.5”W x 16.5”H
                       </td>
-                      <td class="px-6 py-4 font-[500]">
+                      <td className="px-6 py-4 font-[500]">
                         32.5”L x 24”W x 18.5”H
                       </td>
-                      <td class="px-6 py-4 font-[500]">24</td>
+                      <td className="px-6 py-4 font-[500]">24</td>
                     </tr>
 
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                       <td class="px-6 py-4 font-[500]">
                         35”L x 24”W x 37–45”H
-                        <span class="text-gray-500">(front to back wheel)</span>
+                        <span className="text-gray-500">
+                          (front to back wheel)
+                        </span>
                       </td>
-                      <td class="px-6 py-4 font-[500]">
+                      <td className="px-6 py-4 font-[500]">
                         32.5”L x 18.5”W x 16.5”H
                       </td>
-                      <td class="px-6 py-4 font-[500]">
+                      <td className="px-6 py-4 font-[500]">
                         32.5”L x 24”W x 18.5”H
                       </td>
-                      <td class="px-6 py-4 font-[500]">24</td>
+                      <td className="px-6 py-4 font-[500]">24</td>
                     </tr>
                   </tbody>
                 </table>

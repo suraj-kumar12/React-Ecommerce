@@ -17,10 +17,8 @@ const CartPage = () => {
                 There are <span>2</span>products in your cart
               </p>
             </div>
-
             <CartItem size="S" qty={1} />
             <CartItem size="S" qty={1} />
-
             <CartItem size="S" qty={1} />
             <CartItem size="S" qty={1} />
           </div>

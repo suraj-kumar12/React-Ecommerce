@@ -21,6 +21,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Checkout from "./pages/Checkout";
 import MyAccount from "./pages/MyAccount";
 import MyList from "./pages/MyList";
+import Orders from "./pages/Orders";
 
 const MyContext = createContext();
 
@@ -30,7 +31,8 @@ const App = () => {
     React.useState(false);
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = useState("lg");
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const toggleCartPanel = (newOpen) => () => {
     setOpenCartPanel(newOpen);
@@ -88,6 +90,7 @@ const App = () => {
             <Route path="/verify" exact={true} element={<Verify />}></Route>
             <Route path="/checkout" exact={true} element={<Checkout />}></Route>
             <Route path="/my-list" exact={true} element={<MyList />}></Route>
+            <Route path="/my-orders" exact={true} element={<Orders />}></Route>
             <Route
               path="/my-account"
               exact={true}
