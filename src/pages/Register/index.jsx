@@ -21,7 +21,7 @@ const Register = () => {
   });
 
   const context = useContext(MyContext);
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const onChangeInput = (e) => {
     const { name, value } = e.target;
@@ -40,33 +40,41 @@ const Register = () => {
     setIsLoading(true);
     if (formFields.name === "") {
       context.openAlertBox("error", "Please enter full name");
-      return false;
+      setIsLoading(false);
+      return;
     }
 
     if (formFields.email === "") {
       context.openAlertBox("error", "Please enter email");
+      setIsLoading(false);
+      return;
     }
 
     if (formFields.password === "") {
       context.openAlertBox("error", "Please enter password");
+      setIsLoading(false);
+      return;
     }
     postData("/api/user/register", formFields).then((res) => {
       console.log(res);
 
-      localStorage.setItem("userEmail", formFields.email);
-      context.openAlertBox(res.message);
-      setIsLoading(false);
+      if (res?.success) {
+        localStorage.setItem("userEmail", formFields.email);
+        localStorage.setItem("actionType", "register");
+        context.openAlertBox("success", res.message);
+        setIsLoading(false);
 
-      setFormFields({
-        name: "",
-        email: "",
-        password: "",
-      });
-
-      history("/verify");
+        setFormFields({
+          name: "",
+          email: "",
+          password: "",
+        });
+        navigate("/verify");
+      } else {
+        context.openAlertBox("error", res.response.data.message);
+      }
     });
   };
-
   return (
     <section className="section py-10">
       <div className="container">

@@ -7,31 +7,55 @@ import { MyContext } from "../../App";
 
 const verify = () => {
   const [otp, setOtp] = useState("");
-  const email = localStorage.getItem("userEmail");
+
   const handleOtpChange = (value) => {
     setOtp(value);
   };
 
-  const history = useNavigate();
+  const navigate = useNavigate();
   const context = useContext(MyContext);
 
-  const verityOtp = (e) => {
-    e.preventDefault();
-    postData("/api/user/verifyEmail", {
-      email: email,
-      otp: otp,
-    }).then((res) => {
-      console.log(res);
+  const actionType = localStorage.getItem("actionType");
+  const email = localStorage.getItem("userEmail");
 
-      if (res?.error === false) {
-        context.openAlertBox("success", res?.message);
-        localStorage.removeItem("userEmail");
-        history("/login");
-      } else {
-        context.openAlertBox("error", res?.message);
-      }
-    });
-    alert(otp);
+  const verifyOtp = (e) => {
+    e.preventDefault();
+
+    // verify emaill............
+
+    if (actionType === "register") {
+      postData("/api/user/verifyEmail", {
+        email: localStorage.getItem("userEmail"),
+        otp: otp,
+      }).then((res) => {
+        console.log(res);
+
+        if (res?.error === false) {
+          context.openAlertBox("success", res?.message);
+          localStorage.removeItem("userEmail");
+          navigate("/login");
+        } else {
+          context.openAlertBox("error", res?.message);
+        }
+      });
+    }
+
+    if (actionType === "forgot-password") {
+      // .....forgot password otp.........
+      postData("/api/user/verify-Forgot-Password-Otp", {
+        email: localStorage.getItem("userEmail"),
+        otp: otp,
+      }).then((res) => {
+        console.log(res);
+
+        if (res?.error === false) {
+          context.openAlertBox("success", res?.message);
+          navigate("/forgot-password");
+        } else {
+          context.openAlertBox("error", res?.message);
+        }
+      });
+    }
   };
 
   return (
@@ -50,7 +74,7 @@ const verify = () => {
             <span className="text-primary-500 font-bold">{email}</span>
           </p>
 
-          <form onSubmit={verityOtp}>
+          <form onSubmit={verifyOtp}>
             <OtpBox length={6} onChange={handleOtpChange} />
 
             <div className="flex items-center justify-center mt-5 px-3">

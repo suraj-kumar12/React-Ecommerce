@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import Header from "./components/Header";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
@@ -22,6 +22,8 @@ import Checkout from "./pages/Checkout";
 import MyAccount from "./pages/MyAccount";
 import MyList from "./pages/MyList";
 import Orders from "./pages/Orders";
+import { fetchDataFromApi } from "./utils/api";
+import { Address } from "./pages/MyAccount/address";
 
 const MyContext = createContext();
 
@@ -32,7 +34,7 @@ const App = () => {
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = useState("lg");
   const [isLogin, setIsLogin] = useState(false);
-  const apiUrl = import.meta.env.VITE_API_URL;
+  const [userData, setUserData] = useState(null);
 
   const toggleCartPanel = (newOpen) => () => {
     setOpenCartPanel(newOpen);
@@ -46,6 +48,30 @@ const App = () => {
     setOpenProductDetailsModal(false);
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("accesstoken");
+
+    if (token !== null && token !== undefined && token !== "") {
+      // setIsLogin(true);
+
+      fetchDataFromApi("/api/user/user-details").then((res) => {
+        setIsLogin(true);
+        setUserData(res.data);
+        if (res?.response?.data?.error === true) {
+          if (res?.response?.data?.message === "you have not login") {
+            localStorage.removeItem("accesstoken");
+            localStorage.removeItem("refreshtoken");
+            openAlertBox("error", "Your session is closed please login again");
+            setIsLogin(false);
+            window.location.href = "/login";
+          }
+        }
+      });
+    } else {
+      setIsLogin(false);
+    }
+  }, [isLogin]);
+
   const openAlertBox = (status, msg) => {
     if (status === "success") {
       toast.success(msg);
@@ -53,7 +79,6 @@ const App = () => {
     if (status === "error") {
       toast.error(msg);
     }
-    toast(status);
   };
 
   const values = {
@@ -64,6 +89,8 @@ const App = () => {
     openAlertBox,
     isLogin,
     setIsLogin,
+    setUserData,
+    userData,
   };
 
   return (
@@ -91,6 +118,7 @@ const App = () => {
             <Route path="/checkout" exact={true} element={<Checkout />}></Route>
             <Route path="/my-list" exact={true} element={<MyList />}></Route>
             <Route path="/my-orders" exact={true} element={<Orders />}></Route>
+            <Route path="/address" exact={true} element={<Address />}></Route>
             <Route
               path="/my-account"
               exact={true}

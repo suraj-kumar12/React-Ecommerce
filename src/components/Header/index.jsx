@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Search from "../Search";
 
 import Badge from "@mui/material/Badge";
@@ -14,12 +14,12 @@ import Navigation from "./Navigation";
 import { MyContext } from "../../App";
 import { Button } from "@mui/material";
 import { FaRegCircleUser } from "react-icons/fa6";
-
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { IoBagRemoveOutline } from "react-icons/io5";
 import { CiHeart } from "react-icons/ci";
+import { fetchDataFromApi } from "../../utils/api";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -33,6 +33,9 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
+  const context = useContext(MyContext);
+  const navigate = useNavigate();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -41,7 +44,25 @@ const Header = () => {
     setAnchorEl(null);
   };
 
-  const context = useContext(MyContext);
+  const logout = () => {
+    setAnchorEl(null);
+
+    // ....logout........
+    fetchDataFromApi(
+      `/api/user/logout?token=${localStorage.getItem("accesstoken")}`,
+      {
+        withCredentials: true,
+      }
+    ).then((res) => {
+      localStorage.removeItem("accesstoken");
+      localStorage.removeItem("refreshtoken");
+      if (res?.error !== true) {
+        context.setIsLogin(false);
+        context.openAlertBox("success", res?.message);
+        navigate("/");
+      }
+    });
+  };
 
   return (
     <header>
@@ -119,10 +140,10 @@ const Header = () => {
                       </Button>
                       <div className="info flex flex-col">
                         <h4 className="text-[14px] !capitalize font-[500] mb-0 text-left justify-start text-[rgba(0,0,0,0.6)] leading-3">
-                          Suraj Roman
+                          {context?.userData?.name}
                         </h4>
                         <span className="text-[13px]  capitalize font-[400] mb-0 text-left justify-start text-[rgba(0,0,0,0.6)]">
-                          surajroman2588@gmail.com
+                          {context?.userData?.email}
                         </span>
                       </div>
                     </div>
@@ -195,10 +216,7 @@ const Header = () => {
                       </MenuItem>
                     </Link>
                     <Link to={"/login"} className="w-full">
-                      <MenuItem
-                        onClick={handleClose}
-                        className="flex gap-2 !py-2"
-                      >
+                      <MenuItem onClick={logout} className="flex gap-2 !py-2">
                         <IoIosLogOut className="text-[18px]" />
                         <span className="text-[14px]">Logout</span>
                       </MenuItem>
